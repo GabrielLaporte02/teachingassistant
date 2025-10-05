@@ -25,3 +25,9 @@ Feature: Apresentação e coleta de respostas de flashcards
   Given que o aluno revisou todos os flashcards de uma disciplina
   When o aluno tenta iniciar uma nova revisão
   Then o sistema deve notificar o aluno que não há mais flashcards disponíveis.
+
+  Scenario: Tentativa de resposta sem visualizar a frente do flashcard
+  Given que o aluno está visualizando a pergunta do flashcard
+  When o aluno tenta marcar "Eu acertei" ou "Eu errei"
+  Then o sistema deve impedir a ação
+  And exibir uma mensagem pedindo para o aluno visualizar a resposta primeiro.
