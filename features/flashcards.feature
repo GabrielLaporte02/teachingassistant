@@ -31,3 +31,9 @@ Feature: Apresentação e coleta de respostas de flashcards
   When o aluno tenta marcar "Eu acertei" ou "Eu errei"
   Then o sistema deve impedir a ação
   And exibir uma mensagem pedindo para o aluno visualizar a resposta primeiro.
+
+  Scenario: Aluno tenta responder a um flashcard com dados inválidos
+  Given que o aluno está em um flashcard interativo
+  When o aluno tenta submeter uma resposta com caracteres especiais
+  Then o sistema deve bloquear a submissão
+  And exibir uma mensagem de erro indicando formato inválido.
