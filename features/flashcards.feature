@@ -51,3 +51,13 @@ Scenario: Visualização de progresso após revisão
     Given que o aluno terminou uma sessão de flashcards
     When ele acessa o painel de progresso
     Then o sistema deve exibir a pontuação da sessão atual.
+
+    
+
+
+
+
+Scenario: Persistência da última pontuação
+    Given que o aluno visualizou sua pontuação na sessão anterior
+    When o aluno fecha e reabre o painel de progresso
+    Then a última pontuação obtida deve ser exibida.
