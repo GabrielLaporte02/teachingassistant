@@ -16,3 +16,10 @@ Given:  O usuário acessou a tela de criação de flashcards.
 When: O usuário preenche o campo "Escreva o conteúdo" com caracteres inválidos.
 And O usuário clica no botão "Salvar".
 Then O sistema deve exibir uma mensagem de erro "Flashcard não aceita caracteres inválidos".
+
+Cenário 4: Adicionar título a um flashcard
+Given O usuário está na tela de edição de um flashcard.
+and O usuário vai no campo "Título do flashcard".
+When O usuário preenche o campo com "Título exemplo".
+And O usuário clica em "Salvar".
+Then O flashcard deve agora possuir o Título "Título exemplo" .
