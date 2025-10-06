@@ -16,3 +16,4 @@ Given:  O usuário acessou a tela de criação de flashcards.
 When: O usuário preenche o campo "Escreva o conteúdo" com caracteres inválidos.
 And O usuário clica no botão "Salvar".
 Then O sistema deve exibir uma mensagem de erro "Flashcard não aceita caracteres inválidos".
+and O sistema deve atualizar para a página principal de listagem.
