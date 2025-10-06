@@ -1,0 +1,10 @@
+Cenário 1: Criação de um novo flashcard com sucesso
+Given: O usuário acessou a tela de criação de flashcards.
+
+When: O usuário preenche o campo "Nome do Flashcard"
+
+And: O usuário clica no botão "Salvar".
+
+Then: O sistema deve exibir a mensagem de sucesso a "Flashcard criado com sucesso!".
+
+And: O novo flashcard deve ser visível na lista de flashcards do usuário.
