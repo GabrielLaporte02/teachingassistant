@@ -68,3 +68,12 @@ Scenario: Persistência da última pontuação
     Given que o aluno visualizou sua pontuação na sessão anterior
     When o aluno fecha e reabre o painel de progresso
     Then a última pontuação obtida deve ser exibida.
+
+
+
+
+Scenario: Visualização de Conteúdo Estendido no Flashcard
+  Given que o aluno está visualizando um flashcard
+  When ele clica no ícone de "Detalhes"
+  Then o sistema deve exibir uma explicação estendida do conteúdo.
+  
