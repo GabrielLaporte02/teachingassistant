@@ -76,4 +76,10 @@ Scenario: Visualização de Conteúdo Estendido no Flashcard
   Given que o aluno está visualizando um flashcard
   When ele clica no ícone de "Detalhes"
   Then o sistema deve exibir uma explicação estendida do conteúdo.
+
+
+Scenario: Marcação de Flashcard para Revisão Posterior
+  Given que o aluno está visualizando um flashcard
+  When ele clica no ícone de "Marcar para Revisar"
+  Then o sistema deve adicionar o flashcard a uma lista de revisão rápida.
   
