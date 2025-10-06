@@ -22,7 +22,7 @@ Feature: Apresentação e coleta de respostas de flashcards
     Then o sistema deve registrar o erro e avançar para o próximo flashcard.
 
     Scenario: Sistema não apresenta mais flashcards para a disciplina
-  Given que o aluno revisou todos os flashcards de uma disciplina
+  Given prioritariamente que o aluno revisou todos os flashcards de uma disciplina
   When o aluno tenta iniciar uma nova revisão
   Then o sistema deve notificar o aluno que não há mais flashcards disponíveis.
 
