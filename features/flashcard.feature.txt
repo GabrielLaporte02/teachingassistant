@@ -1,6 +1,6 @@
 Cenário 1: Criação de um novo flashcard com sucesso
 Given: O usuário acessou a tela de criação de flashcards.
-When: O usuário preenche o campo "Escreva o conteúdo"
+When: O usuário preenche o campo "Escreva o conteúdo".
 And: O usuário clica no botão "Salvar".
 Then: O sistema deve exibir a mensagem de sucesso a "Flashcard criado com sucesso!".
 And: O novo flashcard deve ser visível na lista de flashcards do usuário.
@@ -10,3 +10,9 @@ Given O usuário acessou a tela de criação de flashcards.
 When O usuário não preenche o campo "Escreva o conteúdo".
 And O usuário clica no botão "Salvar".
 Then O sistema deve exibir uma mensagem de erro "O conteúdo não pode estar em branco".
+
+Cenário 3: Tentativa de criação de um flashcard com caracteres inválidos
+Given:  O usuário acessou a tela de criação de flashcards.
+When: O usuário preenche o campo "Escreva o conteúdo" com caracteres inválidos.
+And O usuário clica no botão "Salvar".
+Then O sistema deve exibir uma mensagem de erro "Flashcard não aceita caracteres inválidos".
