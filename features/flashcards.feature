@@ -43,6 +43,8 @@ Feature: Apresentação e coleta de respostas de flashcards
     When o sistema tenta carregar o próximo flashcard
     Then o sistema deve exibir uma mensagem de erro amigável
     And o erro deve ser registrado no log do servidor.
+    And **o sistema deve automaticamente tentar recarregar o próximo flashcard em 5 segundos.**
+
   Scenario: Sistema falha ao carregar o próximo flashcard
   Given que o aluno respondeu corretamente ao flashcard atual
   When o sistema tenta carregar o próximo flashcard
