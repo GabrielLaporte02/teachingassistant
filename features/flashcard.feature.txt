@@ -17,3 +17,18 @@ When: O usuário preenche o campo "Escreva o conteúdo" com caracteres inválido
 And O usuário clica no botão "Salvar".
 Then O sistema deve exibir uma mensagem de erro "Flashcard não aceita caracteres inválidos".
 and O sistema deve atualizar para a página principal de listagem.
+
+Cenário 4: Adicionar título a um flashcard
+Given O usuário está na tela de edição de um flashcard.
+and O usuário vai no campo "Título do flashcard".
+When O usuário preenche o campo com "Título exemplo".
+And O usuário clica em "Salvar".
+Then O flashcard deve agora possuir o Título "Título exemplo" .
+
+Cenário 5: Exclusão de um flashcard
+Given: O usuário está na lista de flashcards.
+And: Existe um flashcard que o usuário quer apagar.
+When: O usuário clica na opção "Excluir" do flashcard.
+And: O sistema exibe a mensagem "Você tem certeza que deseja excluir?".
+And: O usuário confirma a exclusão.
+Then: O sistema deve remover o flashcard da lista.
