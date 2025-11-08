@@ -22,23 +22,32 @@ app.get('/alunos', function (req, res) {
   res.send(JSON.stringify(cadastro.getAlunos()));
 })
 
+// ***** ROTA POST MODIFICADA *****
 app.post('/aluno', function (req: express.Request, res: express.Response) {
-  var aluno: Aluno = <Aluno> req.body; //verificar se é mesmo Aluno!
-  aluno = cadastro.criar(aluno);
-  if (aluno) {
-    res.send({"success": "O aluno foi cadastrado com sucesso"});
+  var aluno: Aluno = <Aluno> req.body;
+  var result = cadastro.criar(aluno); // 'result' pode ser Aluno ou {failure: ...}
+
+  // Verifica se o 'result' é um objeto de falha
+  if (result && result.failure) { 
+    res.status(400).send(result); // Envia o erro (ex: {"failure": "CPF duplicado"})
   } else {
-    res.send({"failure": "O aluno não pode ser cadastrado"});
+    res.send(result); // Envia o aluno (sucesso)
   }
 })
 
+// ***** ROTA PUT MODIFICADA *****
 app.put('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
-  aluno = cadastro.atualizar(aluno);
-  if (aluno) {
-    res.send({"success": "O aluno foi atualizado com sucesso"});
+  var result = cadastro.atualizar(aluno); // 'result' pode ser Aluno ou {failure: ...}
+
+  // Verifica se o 'result' é um objeto de falha
+  if (result && result.failure) {
+     res.status(400).send(result); // Envia o erro (ex: {"failure": "GitHub duplicado"})
+  } else if (result) {
+     res.send(result); // Sucesso
   } else {
-    res.send({"failure": "O aluno não pode ser atualizado"});
+     // Se o 'result' for undefined (não encontrou o aluno)
+     res.status(404).send({"failure": "Aluno não encontrado"});
   }
 })
 

@@ -15,30 +15,29 @@ export class AlunoService {
   criar(aluno: Aluno): Promise<Aluno> {
     return this.http.post(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
            .toPromise()
-           .then(res => {
-              if (res.json().success) {return aluno;} else {return null;}
-           })
-           .catch(this.tratarErro);
+           .then(res => res.json() as Aluno) // O backend retorna o Aluno no sucesso
+           .catch(this.tratarErro); // O tratarErro agora vai repassar o JSON
   }
 
   atualizar(aluno: Aluno): Promise<Aluno> {
     return this.http.put(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
-         .toPromise()
-         .then(res => {
-            if (res.json().success) {return aluno;} else {return null;}
-         })
-         .catch(this.tratarErro);
+           .toPromise()
+           .then(res => res.json() as Aluno) // Retorna o aluno atualizado no sucesso
+           .catch(this.tratarErro);
   }
 
   getAlunos(): Promise<Aluno[]> {
     return this.http.get(this.taURL + "/alunos")
-             .toPromise()
-             .then(res => res.json() as Aluno[])
-             .catch(this.tratarErro);
+               .toPromise()
+               .then(res => res.json() as Aluno[])
+               .catch(this.tratarErro);
   }
 
+  // ***** MÉTODO 'tratarErro' MODIFICADO *****
   private tratarErro(erro: any): Promise<any>{
-    console.error('Acesso mal sucedido ao serviço de alunos',erro);
-    return Promise.reject(erro.message || erro);
+    console.error('Acesso mal sucedido ao serviço de alunos', erro);
+    // Repassa o *corpo JSON* do erro (que contém {failure: "..."})
+    // Em vez de 'erro.message', nós rejeitamos o 'erro.json()'
+    return Promise.reject(erro.json() || erro.message || erro);
   }
 }
