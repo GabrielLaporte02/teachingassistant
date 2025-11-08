@@ -27,6 +27,8 @@ export class AlunosComponent implements OnInit {
            }
         })
         .catch(erro => alert(erro));
+
+     alert("Já executei o criar e o then/catch!"); // <-- ADICIONE ESTA LINHA AQUI
    }
 
    onMove(): void {
