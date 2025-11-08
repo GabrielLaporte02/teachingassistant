@@ -9,17 +9,18 @@ export class Aluno {
     this.clean();
   }
 
-  clean(): void {
-    this.nome = "";
-    this.cpf = "";
-    this.email = "";
-    this.github = ""; 
-    this.metas = { 
-        "requisitos": "",
-        "gerDeConfiguracao": "",
-        "testes": ""
-    };
-  }
+clean(): void {
+  this.nome = "";
+  this.cpf = "";
+  this.email = "";
+  this.github = "";
+  this.metas = { // Inicializa como objeto com TODAS as metas
+      "requisitos": "",
+      "gerDeConfiguracao": "",
+      "gerencia de projetos": "", // NOVA META
+      "testes": "" // NOVA META
+  };
+}
 
   clone(): Aluno {
     var aluno: Aluno = new Aluno();
