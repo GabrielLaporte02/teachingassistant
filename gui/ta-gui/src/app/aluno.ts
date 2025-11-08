@@ -2,7 +2,8 @@ export class Aluno {
   nome: string;
   cpf: string;
   email: string;
-  metas: Map<string,string>;
+  github: string; 
+  metas: any = {}; // Alterado de Map<string,string> para um objeto simples
 
   constructor() {
     this.clean();
@@ -12,12 +13,16 @@ export class Aluno {
     this.nome = "";
     this.cpf = "";
     this.email = "";
-    this.metas = new Map<string,string>();
+    this.github = ""; 
+    this.metas = { 
+        "requisitos": "",
+        "gerDeConfiguracao": "",
+        "testes": ""
+    };
   }
 
   clone(): Aluno {
     var aluno: Aluno = new Aluno();
-    aluno.metas = new Map<string,string>();
     aluno.copyFrom(this);
     return aluno;
   }
@@ -26,13 +31,19 @@ export class Aluno {
     this.nome = from.nome;
     this.cpf = from.cpf;
     this.email = from.email;
+    this.github = from.github; 
     this.copyMetasFrom(from.metas);
   }
 
-  copyMetasFrom(from: Map<string,string>): void {
-    this.metas = new Map<string,string>();
-    for (let key in from) {
-      this.metas[key] = from[key];
+  // Este método agora lida com objetos JSON simples
+  copyMetasFrom(from: any): void {
+    this.metas = {}; // Limpa
+    if (from) {
+        for (const key in from) {
+            if (from.hasOwnProperty(key)) {
+                this.metas[key] = from[key]; // Copia os valores do objeto
+            }
+        }
     }
   }
 }

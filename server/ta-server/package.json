@@ -4,19 +4,19 @@
   "description": "Servidor do teaching assistant",
   "main": "ta-server.js",
   "scripts": {
-    "test": "jasmine --config=./spec/support/jasmine.json",
-    "tsc": "./node_modules/typescript/bin/tsc",
-    "start": "npm run tsc && node typeScript/server/ta-server/ta-server.js"
-  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "tsc": "./node_modules/typescript/bin/tsc -p tsconfig.json",
+  "start": "npm run tsc && node compiledCode/server/ta-server/ta-server.js"
+},
   "author": "Paulo Borba",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.4",
-    "body-parser": "^1.18.2",
+    "@types/bluebird": "3.0",
     "@types/body-parser": "^1.16.5",
     "@types/express": "^4.0.37",
-    "request": "^2.34",
-    "@types/bluebird": "3.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4",
+    "request": "^2.34"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.9",
@@ -24,6 +24,6 @@
     "jasmine": "^2.8.0",
     "jasmine-promises": "^0.4.1",
     "request-promise": "^4.2.2",
-    "typescript": "^3.3.3333"
+    "typescript": "^5.9.3"
   }
 }
