@@ -22,32 +22,46 @@ app.get('/alunos', function (req, res) {
   res.send(JSON.stringify(cadastro.getAlunos()));
 })
 
-// ***** ROTA POST MODIFICADA *****
+
 app.post('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
-  var result = cadastro.criar(aluno); // 'result' pode ser Aluno ou {failure: ...}
+  var result = cadastro.criar(aluno); 
 
-  // Verifica se o 'result' é um objeto de falha
+
+
   if (result && result.failure) { 
-    res.status(400).send(result); // Envia o erro (ex: {"failure": "CPF duplicado"})
+    res.status(400).send(result); 
   } else {
-    res.send(result); // Envia o aluno (sucesso)
+    res.send(result); 
   }
 })
 
-// ***** ROTA PUT MODIFICADA *****
+
 app.put('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
-  var result = cadastro.atualizar(aluno); // 'result' pode ser Aluno ou {failure: ...}
+  var result = cadastro.atualizar(aluno); 
 
-  // Verifica se o 'result' é um objeto de falha
+
+
+  
   if (result && result.failure) {
-     res.status(400).send(result); // Envia o erro (ex: {"failure": "GitHub duplicado"})
+     res.status(400).send(result); 
   } else if (result) {
-     res.send(result); // Sucesso
+     res.send(result); 
   } else {
-     // Se o 'result' for undefined (não encontrou o aluno)
      res.status(404).send({"failure": "Aluno não encontrado"});
+  }
+})
+
+// ***** ROTA DELETE ADICIONADA *****
+app.delete('/aluno/:cpf', function (req: express.Request, res: express.Response) {
+  var cpf: string = req.params.cpf; // Pega o CPF da URL
+  var result = cadastro.remover(cpf); 
+
+  if (result) {
+    res.send(result); // Sucesso (envia o aluno removido)
+  } else {
+    res.status(404).send({"failure": "Aluno não encontrado"});
   }
 })
 

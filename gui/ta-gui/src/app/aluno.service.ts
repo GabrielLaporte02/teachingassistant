@@ -15,14 +15,23 @@ export class AlunoService {
   criar(aluno: Aluno): Promise<Aluno> {
     return this.http.post(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
            .toPromise()
-           .then(res => res.json() as Aluno) // O backend retorna o Aluno no sucesso
-           .catch(this.tratarErro); // O tratarErro agora vai repassar o JSON
+           .then(res => res.json() as Aluno)
+           .catch(this.tratarErro);
   }
 
   atualizar(aluno: Aluno): Promise<Aluno> {
     return this.http.put(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
            .toPromise()
-           .then(res => res.json() as Aluno) // Retorna o aluno atualizado no sucesso
+           .then(res => res.json() as Aluno)
+           .catch(this.tratarErro);
+  }
+
+  // ***** MÉTODO 'remover' ADICIONADO *****
+  remover(cpf: string): Promise<Aluno> {
+    // Envia uma requisição DELETE para /aluno/cpf (ex: /aluno/123)
+    return this.http.delete(this.taURL + "/aluno/" + cpf, {headers: this.headers})
+           .toPromise()
+           .then(res => res.json() as Aluno)
            .catch(this.tratarErro);
   }
 
@@ -33,11 +42,11 @@ export class AlunoService {
                .catch(this.tratarErro);
   }
 
-  // ***** MÉTODO 'tratarErro' MODIFICADO *****
+
   private tratarErro(erro: any): Promise<any>{
+
     console.error('Acesso mal sucedido ao serviço de alunos', erro);
-    // Repassa o *corpo JSON* do erro (que contém {failure: "..."})
-    // Em vez de 'erro.message', nós rejeitamos o 'erro.json()'
+
     return Promise.reject(erro.json() || erro.message || erro);
   }
 }

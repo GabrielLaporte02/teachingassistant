@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core'; // 1. IMPORTAR NgZone
+import { Component, OnInit, NgZone } from '@angular/core';
 import { NgModule } from '@angular/core';
 
 import { Aluno } from './aluno';
@@ -9,8 +9,9 @@ import { AlunoService } from './aluno.service';
   templateUrl: './alunos.component.html',
   styleUrls: ['./alunos.component.css']
 })
+
 export class AlunosComponent implements OnInit {
-   // 2. INJETAR NgZone
+
    constructor(private alunoService: AlunoService, private zone: NgZone) {}
 
    aluno: Aluno = new Aluno();
@@ -30,11 +31,10 @@ export class AlunosComponent implements OnInit {
            }
         })
         .catch(erro => {
-            // 3. O .catch() agora lê o JSON de erro enviado pelo serviço
+         
 
-            // 'erro' é o JSON: { failure: "..." }
-            // 4. USAR NgZone para forçar a atualização da tela
             this.zone.run(() => {
+
               if (erro.failure === "CPF duplicado") {
                   this.cpfduplicado = true;
               } else if (erro.failure === "GitHub duplicado") {
@@ -43,6 +43,22 @@ export class AlunosComponent implements OnInit {
                   alert("Erro desconhecido ao tentar criar aluno");
               }
             });
+        });
+   }
+
+   // ***** MÉTODO 'removerAluno' ADICIONADO *****
+   removerAluno(aluno: Aluno): void {
+     this.alunoService.remover(aluno.cpf)
+        .then(a => {
+           if (a) {
+             // Remove o aluno do array local (para a UI atualizar)
+             this.alunos = this.alunos.filter(al => al.cpf !== a.cpf);
+           } else {
+             alert("Aluno não removido (erro no servidor).");
+           }
+        })
+        .catch(erro => {
+            alert(erro.message || "Erro desconhecido ao tentar remover aluno");
         });
    }
 
@@ -56,6 +72,6 @@ export class AlunosComponent implements OnInit {
          .then(as => this.alunos = as)
          .catch(erro => alert(erro));
    }
-   
+
 }
 
